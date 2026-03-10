@@ -106,7 +106,7 @@ class NotificationService {
 
     scheduleDailyNotification() {
         // Schedule at 6:00 AM every day
-        cron.schedule('27 7 * * *', async () => {
+        cron.schedule('00 6 * * *', async () => {
             console.log('Running scheduled notification at 6 AM');
             await this.sendNotification();
         });
