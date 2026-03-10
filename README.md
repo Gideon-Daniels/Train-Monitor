@@ -5,10 +5,7 @@ A Node.js application that monitors train schedules from cttrains.co.za and send
 ## Features
 
 -  Scrapes train schedules from cttrains.co.za
--  Compares current schedule with previously stored data
--  Sends Pushover notifications when changes are detected
-- ⏰ Runs on a configurable schedule
--  Stores schedule history locally
+-  Sends notifications via Pushover
 
 ## Setup
 
@@ -16,5 +13,3 @@ A Node.js application that monitors train schedules from cttrains.co.za and send
 
 ```bash
 npm install
-```# Train-Monitor
-# Train-Monitor
