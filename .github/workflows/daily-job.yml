@@ -12,7 +12,7 @@ jobs:
       PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
       PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
       DEPARTURE_STATION: ${{ secrets.DEPARTURE_STATION }}
-      ARRIVAL_STATION: ${{ secrets.DESTINATION_STATION }}
+      ARRIVAL_STATION: ${{ secrets.ARRIVAL_STATION }}
       DEPARTURE_TIME: ${{ secrets.DEPARTURE_TIME }}
 
     steps:

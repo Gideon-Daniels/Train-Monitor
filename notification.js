@@ -11,7 +11,6 @@ class NotificationService {
 
     constructor() {
         if(!this.arrivalStation || !this.departureStation || !this.departureTime || !this.token || !this.user){
-            console.log("Missing required environment variables", this.arrivalStation, this.departureStation, this.departureTime, this.token, this.user)
             throw new Error('Missing required environment variables');
         }
         this.sendNotification().then(() => {
