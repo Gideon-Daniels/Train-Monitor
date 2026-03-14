@@ -2,7 +2,7 @@ name: Daily Node Job
 
 on:
   schedule:
-    - cron: "41 09 * * *"   # runs once every day at midnight UTC
+    - cron: "45 9 * * *"   # runs once every day at midnight UTC
   workflow_dispatch:      # optional manual trigger
 
 jobs:
