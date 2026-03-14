@@ -4,7 +4,7 @@
   "description": "Train schedule monitor that notifies when timetables change",
   "main": "index.js",
   "scripts": {
-    "start": "4",
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "keywords": ["train", "monitor", "scraper", "pushover"],
