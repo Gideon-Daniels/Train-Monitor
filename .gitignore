@@ -26,7 +26,7 @@ Thumbs.db
 
 # Data storage
 data/
-*.json
+package-lock.json
 
 # PM2
 .pm2/

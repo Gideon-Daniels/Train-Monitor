@@ -1,0 +1,23 @@
+{
+  "name": "train-monitor",
+  "version": "1.0.0",
+  "description": "Train schedule monitor that notifies when timetables change",
+  "main": "index.js",
+  "scripts": {
+    "start": "4",
+    "dev": "nodemon index.js"
+  },
+  "keywords": ["train", "monitor", "scraper", "pushover"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "node-cron": "^3.0.3",
+    "pushover-notifications": "^1.2.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
