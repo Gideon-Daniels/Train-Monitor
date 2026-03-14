@@ -1,7 +1,6 @@
 const axios = require('axios');
 require('dotenv').config();
 const trainScraper = require('./scrapping')
-const cron = require('node-cron');
 
 class NotificationService {
     arrivalStation = process.env.ARRIVAL_STATION
@@ -14,10 +13,9 @@ class NotificationService {
         if(!this.arrivalStation || !this.departureStation || !this.departureTime || !this.token || !this.user){
             throw new Error('Missing required environment variables');
         }
-
-        console.log('started daily notification')
-        this.scheduleDailyNotification();
-        this.scheduleTrainArrivalCheck();
+        this.sendNotification().then(() => {
+            this.acknowledgeTrainArrival().then()
+        })
     }
 
     async sendNotification() {
@@ -46,6 +44,7 @@ class NotificationService {
                     }
                 }
             );
+            console.log("Notification sent successfully", message);
         } catch (err) {
             console.error(err.response?.data || err.message);
         }
@@ -61,8 +60,8 @@ class NotificationService {
                     message: "🚆 Has the train arrived?",
                     title: "Train Monitor",
                     priority: 2,
-                    retry: 3000,
-                    expire:30000
+                    retry: 30,
+                    expire:5
                 }),
                 {
                     headers: {
@@ -86,44 +85,20 @@ class NotificationService {
                 }
             }
         );
-
-        console.log(res.data);
         return res.data
     }
 
 
     async acknowledgeTrainArrival(){
         const arrivalData =  await this.askTrainArrival();
-        const responseInterval = setInterval(async () => {
+        const responseInterval = setTimeout(async () => {
             const response = await this.checkResponse(arrivalData.receipt);
-
+            console.log(response)
             if (response.acknowledged === 1 || response.expired === 1) {
                 clearInterval(responseInterval);
                 console.log('Interval cleared:', response.acknowledged === 1 ? 'Acknowledged' : 'Expired');
             }
         }, 5000);
-    }
-
-    scheduleDailyNotification() {
-        // Schedule at 6:00 AM every day
-        cron.schedule('25 10 * * *', async () => {
-            console.log('Running scheduled notification at 6 AM');
-            await this.sendNotification();
-        });
-
-        console.log('Daily notification scheduled for 6:00 AM');
-    }
-
-    scheduleTrainArrivalCheck() {
-        const [hours, minutes] = process.env.DEPARTURE_TIME.split(':');
-
-        // Schedule at your departure time every day
-        cron.schedule(`${minutes} ${hours} * * *`, async () => {
-            console.log(`Running train arrival check at ${process.env.DEPARTURE_TIME}`);
-            await this.acknowledgeTrainArrival();
-        });
-
-        console.log(`Train arrival check scheduled for ${process.env.DEPARTURE_TIME}`);
     }
 
      getTodaysDate() {
