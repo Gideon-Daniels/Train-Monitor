@@ -1,6 +1,6 @@
 const axios = require('axios');
 require('dotenv').config();
-const trainScraper = require('./scrapping')
+const trainScraper = require('../backend/src/ScrappingService/trainScrapper')
 
 class NotificationService {
     arrivalStation = process.env.ARRIVAL_STATION
